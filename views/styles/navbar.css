@@ -1,0 +1,50 @@
+.navbar_container {
+  -webkit-app-region: drag;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: #292929;
+  width: 100%;
+  height: auto;
+  cursor: default;
+  user-select: none;
+}
+.navbar_container .left_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+.navbar_container .left_container .logo_container {
+  width: 50px;
+  background-image: url("../../ressources/logo/px.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.navbar_container .left_container .title_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: azure;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: medium;
+}
+.navbar_container .button_container {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 140px;
+  transition-duration: 2s;
+}
+.navbar_container .button_container .button {
+  -webkit-app-region: no-drag;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  color: sandybrown;
+}
+.navbar_container .button_container .button:hover {
+  background-color: #5e5d63;
+}
