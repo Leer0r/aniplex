@@ -90,3 +90,6 @@ out/
 
 #vscode folder
 .vscode/
+
+#resource folder
+ressources/animes/*

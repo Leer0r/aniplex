@@ -1,7 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const fs = require("fs")
 
 const ejse = require("ejs-electron");
+const { fstat } = require('fs');
 require('@electron/remote/main').initialize()
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -51,8 +53,8 @@ app.on('activate', () => {
 
 ipcMain.on("anime_charged", (e, animes) => {
   console.log(animes);
-  if (animes["Fate⁄stay night, Heaven's Feel I. Presage Flower"]) {
-    console.log("good");
+  if (animes["Fate⁄stay_night,_Heaven's_Feel_I._Presage_Flower"]) {
+    console.log("good !");
   }
   else {
     console.log("bad");
