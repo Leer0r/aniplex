@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=chrome">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>home</title>
     <link rel="stylesheet" href="../styles/home.css">
 </head>
 <body>
-    <script src="../scripts/anime.js" defer></script>
-    <%- include("../includes/include_navbar.ejs") %> 
+    <%- include("../includes/include_navbar.ejs") %>
+    Page chargée !
+    <ul>
+        <% for( var categorie in anime_data.solo ) { %>
+            <li><%= categorie %> </li>
+            <li> <%= anime_data.solo[categorie].hash %> </li>
+        <% } %>
+    </ul>
+    <% ejse.stopListening() %> 
 </body>
 </html>
