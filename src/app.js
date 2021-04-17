@@ -56,7 +56,7 @@ app.on('activate', () => {
 });
 
 ipcMain.on("anime_charged", (e, animes) => {
-  console.log(animes["solo"]);
+  console.log(animes);
   ejse.data("anime_data", animes);
   window.loadFile(path.join(__dirname, '../views/template/home.ejs'));
 })
