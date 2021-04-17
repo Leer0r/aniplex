@@ -6,16 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/anime.css">
 </head>
 <body>
     <%- include("../includes/include_navbar.ejs") %>
-    Page chargée !
-    <ul>
+    <div class="animes_container">
         <% for( var categorie in anime_data.solo ) { %>
-            <li><%= categorie %> </li>
-            <li> <%= anime_data.solo[categorie].hash %> </li>
+            <div class="anime_container">
+                <div class="image_container"></div>
+                <div class="botom_container">
+                    <div class="title_container">
+                        <%= categorie %> 
+                    </div>
+                    <div class="episode_container">
+                        <div class="nb_view_container">
+                            <%= anime_data.solo[categorie].data.nb_watch %> 
+                        </div>
+                        <div class="nb_total_container">
+                            <%= anime_data.solo[categorie].data.nb_ep %>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         <% } %>
-    </ul>
+        <% for( var categorie in anime_data ) {
+            if(categorie == "solo") continue;
+        %>
+        <div class="anime_container">
+                <div class="image_container"></div>
+                <div class="botom_container">
+                    <div class="title_container">
+                        <%= categorie %> 
+                    </div>
+                    <div class="episode_container">
+                        <div class="nb_view_container">
+                            <%= anime_data[categorie].data.nb_watch %> 
+                        </div>
+                        <div class="nb_total_container">
+                            <%= anime_data[categorie].data.nb_ep %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
     <% ejse.stopListening() %> 
 </body>
 </html>

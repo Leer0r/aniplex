@@ -4,3 +4,6 @@ body {
   background-color: #3F3F3F;
   border-radius: 20px;
 }
+body::-webkit-scrollbar {
+  display: none;
+}

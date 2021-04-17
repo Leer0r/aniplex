@@ -93,3 +93,6 @@ out/
 
 #resource folder
 ressources/animes/*
+
+#test folder
+test/

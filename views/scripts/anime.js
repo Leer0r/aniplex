@@ -67,11 +67,12 @@ user_data.animefolder.forEach((folder) => {
                 create_anime_data(path.join("ressources/animes/", anime_hash_string, "data.json"), anime_data)
             }
             else {
-                JSON.parse(fs.readFileSync(path.join("ressources/animes/", anime_hash_string, "data.json")))
+                anime_data = JSON.parse(fs.readFileSync(path.join("ressources/animes/", anime_hash_string, "data.json")))
             }
             animes_render["solo"][unidecode(path.parse(animes).name)] = {
                 "hash": anime_hash_string,
-                "location": anime_name
+                "location": anime_name,
+                "data": anime_data
             };
         }
         else {
@@ -116,3 +117,4 @@ user_data.animefolder.forEach((folder) => {
 })
 
 ipcRenderer.send("anime_charged", animes_render,)
+//add_image_url("Overlord S02");

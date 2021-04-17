@@ -3,4 +3,8 @@ body{
     padding: 0;
     background-color: #3F3F3F;
     border-radius: 20px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
