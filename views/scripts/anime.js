@@ -19,18 +19,16 @@ const { Hash } = require("crypto");
 const unidecode = require("unidecode");
 const { default: axios } = require("axios");
 
-function create_anime_data(location) {
+function create_anime_folder(location) {
     console.log("Create directory at " + location);
-    fs.access(location, (err) => {
-        if (err) { //create a new folder for the anime
-            fs.mkdir(location, (err) => {
-                if (err) {
-                    console.error(err);
-                    return console.error("Mkdir failed...");
-                }
-            })
-        }
-    })
+    fs.mkdirSync(location);
+}
+
+function create_anime_data(location, info) {
+    const json_data = JSON.stringify(info, null, 4)
+    console.log(json_data)
+    fs.writeFileSync(path.join(process.cwd(), location), json_data);
+    ipcRenderer.send("data_add", location);
 }
 
 
@@ -59,13 +57,16 @@ user_data.animefolder.forEach((folder) => {
         if (anime_stat.isFile()) {
             let anime_name = unidecode(anime_content.replace(/\ /g, "_"));
             const anime_hash_string = crypto.MD5(anime_name).toString();
-            //animes_render["solo"][anime_name] = anime_hash_string;
             animes_render["solo"][unidecode(path.parse(animes).name)] = {
                 "hash": anime_hash_string,
                 "location": anime_name
             };
             if (!fs.existsSync(path.join("ressources/animes/", anime_hash_string))) {
-                create_anime_data(path.join("ressources/animes/", anime_hash_string));
+                create_anime_folder(path.join("ressources/animes/", anime_hash_string));
+                create_anime_data(path.join("ressources/animes/", anime_hash_string, "data.json"), {
+                    "nb_ep": 1,
+                    "nb_watch": 0
+                })
             }
         }
         else {
@@ -77,15 +78,28 @@ user_data.animefolder.forEach((folder) => {
             animes_render[animes]["location"] = unidecode(folder_name)
             const folder_content = fs.readdirSync(anime_content);
             let all_episodes = [];
+            let exist = true;
+            if (!fs.existsSync(path.join("ressources/animes/", anime_hash_string))) {
+                create_anime_folder(path.join("ressources/animes/", anime_hash_string));
+                exist = false;
+            }
+            nb_ep = 0;
             folder_content.forEach(sub_anime => {
                 const sub_anime_stat = fs.lstatSync(path.join(anime_content, sub_anime))
                 if (sub_anime_stat.isFile()) {
                     all_episodes.push(unidecode(sub_anime));
+                    nb_ep++;
                 }
             })
+            if (!exist) {
+                create_anime_data(path.join("ressources/animes/", anime_hash_string, "data.json"), {
+                    "nb_ep": nb_ep,
+                    nb_watch: 0
+                });
+            }
             animes_render[animes]["episodes"] = all_episodes;
         }
     })
 })
 
-setTimeout(ipcRenderer.send("anime_charged", animes_render,), 4000);
+ipcRenderer.send("anime_charged", animes_render,)

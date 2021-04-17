@@ -9,9 +9,11 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
+let window;
+
 const buildWindow = () => {
   // Create the browser window.
-  const window = new BrowserWindow({
+  window = new BrowserWindow({
     width: 1500,
     height: 1000,
     frame: false,
@@ -56,7 +58,11 @@ app.on('activate', () => {
 ipcMain.on("anime_charged", (e, animes) => {
   console.log(animes["solo"]);
   ejse.data("anime_data", animes);
-  BrowserWindow.getAllWindows()[0].loadFile(path.join(__dirname, '../views/template/home.ejs'));
+  window.loadFile(path.join(__dirname, '../views/template/home.ejs'));
+})
+
+ipcMain.on("data_add", (e, location) => {
+  console.log(`Data added on ${location}`);
 })
 
 // In this file you can include the rest of your app's specific main process
