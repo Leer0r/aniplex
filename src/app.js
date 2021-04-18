@@ -65,5 +65,9 @@ ipcMain.on("data_add", (e, location) => {
   console.log(`Data added on ${location}`);
 })
 
+ipcMain.on("anime_click", (e, hash) => {
+  console.log(hash);
+})
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

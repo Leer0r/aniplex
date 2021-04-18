@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto-js");
-const http = require("http");
 
 const {
     ipcRenderer

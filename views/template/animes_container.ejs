@@ -1,0 +1,43 @@
+<% if (anime_data) { %>
+    <script src="../scripts/anime_gestioner.js" defer></script>
+    <div class="animes_container">
+        <% for( var categorie in anime_data.solo ) { %>
+            <div class="anime_container" id="<%= anime_data.solo[categorie].hash %>">
+                <div class="image_container"></div>
+                <div class="botom_container">
+                    <div class="title_container">
+                        <%= categorie %> 
+                    </div>
+                    <div class="episode_container">
+                        <div class="nb_view_container">
+                            <%= anime_data.solo[categorie].data.nb_watch %> 
+                        </div>
+                        <div class="nb_total_container">
+                            <%= anime_data.solo[categorie].data.nb_ep %>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        <% } %>
+        <% for( var categorie in anime_data ) {
+            if(categorie == "solo") continue;
+        %>
+        <div class="anime_container" id="<%= anime_data[categorie].hash %>">
+                <div class="image_container"></div>
+                <div class="botom_container">
+                    <div class="title_container">
+                        <%= categorie %> 
+                    </div>
+                    <div class="episode_container">
+                        <div class="nb_view_container">
+                            <%= anime_data[categorie].data.nb_watch %> 
+                        </div>
+                        <div class="nb_total_container">
+                            <%= anime_data[categorie].data.nb_ep %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+<% } %>
