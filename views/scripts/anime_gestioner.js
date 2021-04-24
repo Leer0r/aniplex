@@ -7,4 +7,3 @@ document.querySelectorAll(".anime_container").forEach((anime) => {
         ipcRenderer.send("anime_click", anime.id)
     })
 })
-

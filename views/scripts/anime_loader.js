@@ -13,6 +13,8 @@ let animes_render = {
     "solo": {}
 };
 
+const ext_allowed = [".mp4", ".mkv"];
+
 
 const { Hash } = require("crypto");
 const unidecode = require("unidecode");
@@ -54,7 +56,7 @@ user_data.animefolder.forEach((folder) => {
         const anime_content = path.join(folder, animes);
         const anime_stat = fs.lstatSync(anime_content);
         let anime_data;
-        if (anime_stat.isFile()) {
+        if (anime_stat.isFile() && ext_allowed.includes(path.parse(anime_content).ext)) {
             let anime_name = unidecode(anime_content.replace(/\ /g, "_"));
             const anime_hash_string = crypto.MD5(anime_name).toString();
             if (!fs.existsSync(path.join("ressources/animes/", anime_hash_string))) {
@@ -92,7 +94,7 @@ user_data.animefolder.forEach((folder) => {
 
             folder_content.forEach(sub_anime => {
                 const sub_anime_stat = fs.lstatSync(path.join(anime_content, sub_anime))
-                if (sub_anime_stat.isFile()) {
+                if (sub_anime_stat.isFile()/*  && ext_allowed.includes(path.parse(anime_content).ext) */) {
                     all_episodes.push(unidecode(sub_anime));
                     if (!exist) {
                         nb_ep++;
@@ -114,6 +116,5 @@ user_data.animefolder.forEach((folder) => {
         }
     })
 })
-
 ipcRenderer.send("anime_charged", animes_render,)
 //add_image_url("Overlord S02");
