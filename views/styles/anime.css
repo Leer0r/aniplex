@@ -5,6 +5,10 @@
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
+.animes_container .not_found {
+  color: aliceblue;
+  font-size: xx-large;
+}
 .animes_container .anime_container {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   box-shadow: 1px 1px 1px 1px;
