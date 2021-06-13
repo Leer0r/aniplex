@@ -3,12 +3,9 @@
     <div class="animes_container">
         <% if (Object.keys(anime_data.solo).length === 0 && Object.keys(anime_data).length === 1) { %>
             
-            <div class="not_found">
-                Aucun anime trouvé...
-            </div>
+            <%- include("./anime_not_found.ejs") %> 
         
         <%} else { %>
-            <p>Pas Vide</p>
         
             <% for( var categorie in anime_data.solo ) { %>
                 <div class="anime_container" id="<%= anime_data.solo[categorie].hash %>">
